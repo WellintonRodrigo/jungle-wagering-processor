@@ -1,4 +1,17 @@
+# Dependências
 node_modules/
+
+# Arquivos compilados
 dist/
 *.tsbuildinfo
+
+# Variáveis de ambiente
 .env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Arquivos temporários de diagnóstico
+test-db.cjs

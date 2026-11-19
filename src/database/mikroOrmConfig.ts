@@ -1,0 +1,30 @@
+
+import { defineConfig } from '@mikro-orm/postgresql';
+import { Migrator } from '@mikro-orm/migrations';
+import 'dotenv/config';
+
+export default defineConfig({
+  host: process.env.DB_HOST ?? 'localhost',
+  port: Number(process.env.DB_PORT ?? 5433),
+  user: process.env.DB_USER ?? 'jungle',
+  password: process.env.DB_PASSWORD,
+  dbName: process.env.DB_NAME ?? 'jungle_wagering',
+
+  
+  entities: [],
+
+  //Temporário
+  discovery: {
+    warnWhenNoEntities: false,
+  },
+
+  extensions: [Migrator],
+
+  migrations: {
+    path: './dist/database/migrations',
+    pathTs: './src/database/migrations',
+    emit: 'ts',
+  },
+
+  debug: process.env.NODE_ENV === 'development',
+});
