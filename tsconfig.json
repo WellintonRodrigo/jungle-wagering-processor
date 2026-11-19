@@ -10,14 +10,16 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
+    "target": "ES2022",
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": ".",
-    "incremental": true,
+    "rootDir": "./src",
+    "incremental": false,
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
     "types": ["vitest/globals", "node"]
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "test"]
 }
