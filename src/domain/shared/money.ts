@@ -7,6 +7,8 @@ export interface MoneyProps {
   currency: string;
 }
 
+const SUPPORTED_CURRENCIES = ['BRL', 'USD', 'EUR'] as const;
+
 export class Money {
   private constructor(
     private readonly value: Decimal,
@@ -25,12 +27,12 @@ export class Money {
       throw new Error('Invalid monetary amount');
     }
 
-    // Valida o formato do código da moeda.
+    // Verifica se a moeda é suportada pelo sistema.
     if (
       typeof currency !== 'string' ||
-      !/^[A-Z]{3}$/.test(currency)
+      !SUPPORTED_CURRENCIES.some(code=> code===currency)
     ) {
-      throw new Error('Invalid currency');
+      throw new Error('Unsupported currency');
     }
 
     return new Money(new Decimal(amount), currency);
