@@ -2,6 +2,9 @@
 import { defineConfig } from '@mikro-orm/postgresql';
 import { Migrator } from '@mikro-orm/migrations';
 import 'dotenv/config';
+import { WalletSchema, WalletOrmEntity } from '../infrastructure/persistence/mikro-orm/entities/wallet.orm-entity.js';
+import { WalletLedgerEntrySchema } from '../infrastructure/persistence/mikro-orm/entities/wallet-ledger-entry.orm-entity.js';
+
 
 export default defineConfig({
   host: process.env.DB_HOST ?? 'localhost',
@@ -11,7 +14,7 @@ export default defineConfig({
   dbName: process.env.DB_NAME ?? 'jungle_wagering',
 
   
-  entities: [],
+  entities: [WalletSchema, WalletLedgerEntrySchema],
 
   //Temporário
   discovery: {

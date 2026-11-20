@@ -59,5 +59,10 @@
     "cliui": {
       "string-width": "4.2.3"
     }
+  },
+  "mikro-orm": {
+    "configPaths": [
+      "./src/database/mikroOrmConfig.ts"
+    ]
   }
 }
