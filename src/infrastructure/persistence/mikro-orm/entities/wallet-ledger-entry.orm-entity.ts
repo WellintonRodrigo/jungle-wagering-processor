@@ -77,8 +77,8 @@ export const WalletLedgerEntrySchema = new EntitySchema({
   // com a mesma carteira e direção.
   uniques: [
     {
-      name: 'uq_ledger_transaction_wallet_direction',
-      properties: ['transactionId', 'wallet', 'direction'],
+      name: 'uq_ledger_transaction_wallet',
+      properties: ['transactionId', 'wallet'],
     },
   ],
 
