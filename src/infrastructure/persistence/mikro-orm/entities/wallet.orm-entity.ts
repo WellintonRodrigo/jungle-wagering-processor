@@ -9,6 +9,8 @@ export class WalletOrmEntity {
   currency!: string;
   balance!: string;
   version!: number;
+  createdAt!: Date;
+  updatedAt!: Date;
 }
 
 export const WalletSchema = new EntitySchema({
@@ -41,6 +43,16 @@ export const WalletSchema = new EntitySchema({
     version: {
       type: 'integer',
       default: 1,
+    },
+
+    createdAt: {
+      type: 'datetime',
+      fieldName: 'created_at',
+    },
+
+    updatedAt: {
+      type: 'datetime',
+      fieldName: 'updated_at',
     },
   },
 
