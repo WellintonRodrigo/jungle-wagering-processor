@@ -1,0 +1,78 @@
+### Testar BET
+POST http://localhost:3000/wagering/transactions
+Content-Type: application/json
+Idempotency-Key: provider-a:bet-http-001
+
+{
+  "providerId": "provider-a",
+  "externalTransactionId": "bet-http-001",
+  "playerId": "22222222-2222-4222-8222-222222222222",
+  "walletId": "11111111-1111-4111-8111-111111111111",
+  "roundId": "round-http-001",
+  "gameId": "fortune-chimp",
+  "kind": "BET",
+  "money": {
+    "amount": "25.00",
+    "currency": "BRL"
+  }
+}
+
+### WIN - Creditar ganho
+POST http://localhost:3000/wagering/transactions
+Content-Type: application/json
+Idempotency-Key: provider-a:win-http-001
+
+{
+  "providerId": "provider-a",
+  "externalTransactionId": "win-http-001",
+  "playerId": "22222222-2222-4222-8222-222222222222",
+  "walletId": "11111111-1111-4111-8111-111111111111",
+  "roundId": "round-http-001",
+  "gameId": "fortune-chimp",
+  "kind": "WIN",
+  "money": {
+    "amount": "40.00",
+    "currency": "BRL"
+  }
+}
+
+### REFUND - Devolver a BET original
+POST http://localhost:3000/wagering/transactions
+Content-Type: application/json
+Idempotency-Key: provider-a:refund-http-001
+
+{
+  "providerId": "provider-a",
+  "externalTransactionId": "refund-http-001",
+  "playerId": "22222222-2222-4222-8222-222222222222",
+  "walletId": "11111111-1111-4111-8111-111111111111",
+  "roundId": "round-http-001",
+  "gameId": "fortune-chimp",
+  "kind": "REFUND",
+  "referenceExternalTransactionId": "bet-http-001",
+  "money": {
+    "amount": "25.00",
+    "currency": "BRL"
+  }
+}
+
+
+### ROLLBACK - Reverter WIN original
+POST http://localhost:3000/wagering/transactions
+Content-Type: application/json
+Idempotency-Key: provider-a:rollback-http-001
+
+{
+  "providerId": "provider-a",
+  "externalTransactionId": "rollback-http-001",
+  "playerId": "22222222-2222-4222-8222-222222222222",
+  "walletId": "11111111-1111-4111-8111-111111111111",
+  "roundId": "round-http-001",
+  "gameId": "fortune-chimp",
+  "kind": "ROLLBACK",
+  "referenceExternalTransactionId": "win-http-001",
+  "money": {
+    "amount": "40.00",
+    "currency": "BRL"
+  }
+}
