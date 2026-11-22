@@ -76,3 +76,107 @@ Idempotency-Key: provider-a:rollback-http-001
     "currency": "BRL"
   }
 }
+
+### Criar carteira com saldo inicial
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "playerId": "33333333-3333-4333-8333-333333333333",
+  "initialBalance": {
+    "amount": "1000.00",
+    "currency": "BRL"
+  }
+}
+
+### CONSULTAS
+
+### Consultar carteira
+GET http://localhost:3000/wallets/d4086200-5ed1-46b2-a45d-2f8ecd3976d2
+
+### Consultar carteira inexistente
+GET http://localhost:3000/wallets/99999999-9999-4999-8999-999999999999
+
+### Histórico financeiro da carteira
+GET http://localhost:3000/wallets/d4086200-5ed1-46b2-a45d-2f8ecd3976d2/ledger?limit=20
+
+### Histórico com apenas um lançamento por página
+GET http://localhost:3000/wallets/11111111-1111-4111-8111-111111111111/ledger?limit=1
+
+### Limite inválido
+GET http://localhost:3000/wallets/d4086200-5ed1-46b2-a45d-2f8ecd3976d2/ledger?limit=200
+
+### Cursor inválido
+GET http://localhost:3000/wallets/d4086200-5ed1-46b2-a45d-2f8ecd3976d2/ledger?cursor=invalido
+### Segundo lançamento da página seguinte
+GET http://localhost:3000/wallets/11111111-1111-4111-8111-111111111111/ledger?limit=1&cursor=eyJjcmVhdGVkQXQiOiIyMDI2LTExLTIxVDAwOjE4OjIyLjc2OVoiLCJpZCI6IjMyMDI3M2QxLWNkMDAtNGQ0Yy1hZjIyLWQ5MTFkMTlkMTFlNiJ9
+
+### 1. Consultar transação pelo UUID interno
+GET http://localhost:3000/wagering/transactions/216943a7-47c0-4b4d-a73c-8af4d05c9eb8
+
+### 2. Consultar transação pelo ID externo do provedor
+GET http://localhost:3000/providers/provider-a/wagering/transactions/bet-http-001
+
+### 3. Consultar transação interna inexistente
+GET http://localhost:3000/wagering/transactions/99999999-9999-4999-8999-999999999999
+
+### 4. Consultar transação externa inexistente
+GET http://localhost:3000/providers/provider-a/wagering/transactions/inexistente
+
+### Testes
+
+### TESTE 1 — Criar carteira com saldo zero
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "playerId": "44444444-4444-4444-8444-444444444444",
+  "initialBalance": {
+    "amount": "0.00",
+    "currency": "BRL"
+  }
+}
+
+### TESTE 2 — Rejeitar saldo negativo
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "playerId": "55555555-5555-4555-8555-555555555555",
+  "initialBalance": {
+    "amount": "-100.00",
+    "currency": "BRL"
+  }
+}
+
+### TESTE 3 — Rejeitar valor monetário inválido
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "playerId": "66666666-6666-4666-8666-666666666666",
+  "initialBalance": {
+    "amount": "abc",
+    "currency": "BRL"
+  }
+}
+
+### TESTE 4 — Rejeitar playerId inválido
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "playerId": "jogador-invalido",
+  "initialBalance": {
+    "amount": "100.00",
+    "currency": "BRL"
+  }
+}
+
+### TESTE 5 — Rejeitar campos obrigatórios ausentes
+POST http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "playerId": "77777777-7777-4777-8777-777777777777"
+}

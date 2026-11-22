@@ -5,11 +5,12 @@ import mikroOrmConfig from './database/mikroOrmConfig.js';
 import { MikroOrmModule } from '@mikro-orm/nestjs/mikro-orm.module.js';
 import { ProcessBetUseCase } from './application/wagering/process-bet.use-case.js';
 import { WageringModule } from './application/wagering/wagering.module.js';
-
+import { WalletsModule } from './application/wallet/wallets.module.js';
 @Module({
   imports: [
     MikroOrmModule.forRoot(mikroOrmConfig),
     WageringModule,
+    WalletsModule,
 
   ],
   controllers: [AppController],
