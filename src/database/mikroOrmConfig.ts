@@ -11,6 +11,12 @@ from '../infrastructure/persistence/mikro-orm/entities/wallet-ledger-entry.orm-e
 import { WagerTransactionSchema,} 
 from '../infrastructure/persistence/mikro-orm/entities/wager-transaction.orm-entity.js';
 
+import { InboxMessageSchema } from
+  '../infrastructure/persistence/mikro-orm/entities/inbox-message.orm-entity.js';
+
+import { OutboxEventSchema } from
+  '../infrastructure/persistence/mikro-orm/entities/outbox-event.orm-entity.js';
+
 export default defineConfig({
   host: process.env.DB_HOST ?? 'localhost',
   port: Number(process.env.DB_PORT ?? 5433),
@@ -24,6 +30,8 @@ export default defineConfig({
     WalletSchema,
     WalletLedgerEntrySchema,
     WagerTransactionSchema,
+    InboxMessageSchema,
+    OutboxEventSchema,
   ],
 
 
